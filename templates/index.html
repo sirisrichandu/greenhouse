@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emission Factor Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Supply Chain Emission Factor Prediction</h2>
+
+    <form method="post">
+        <label>Substance (0–3)</label>
+        <input type="number" name="substance" required>
+
+        <label>Unit (0–1)</label>
+        <input type="number" name="unit" required>
+
+        <label>Base Emission Factor</label>
+        <input type="number" step="any" name="base" required>
+
+        <label>Margin</label>
+        <input type="number" step="any" name="margin" required>
+
+        <label>DQ Reliability</label>
+        <input type="number" name="dq1" required>
+
+        <label>DQ Temporal</label>
+        <input type="number" name="dq2" required>
+
+        <label>DQ Geographical</label>
+        <input type="number" name="dq3" required>
+
+        <label>DQ Technological</label>
+        <input type="number" name="dq4" required>
+
+        <label>DQ Data Collection</label>
+        <input type="number" name="dq5" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <h3>Predicted Emission Factor: {{ prediction }}</h3>
+    {% endif %}
+</body>
+</html>
