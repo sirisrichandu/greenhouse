@@ -1,45 +1,304 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Emission Factor Predictor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EcoAI Emission Dashboard</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <h2>Supply Chain Emission Factor Prediction</h2>
 
-    <form method="post">
-        <label>Substance (0–3)</label>
-        <input type="number" name="substance" required>
+    <!-- HEADER -->
 
-        <label>Unit (0–1)</label>
-        <input type="number" name="unit" required>
+    <header class="header">
 
-        <label>Base Emission Factor</label>
-        <input type="number" step="any" name="base" required>
+        <div class="logo">
+            🌍 EcoAI Dashboard
+        </div>
 
-        <label>Margin</label>
-        <input type="number" step="any" name="margin" required>
+        <nav>
+            <a href="#">Dashboard</a>
+            <a href="#">Dataset</a>
+            <a href="#">About</a>
+        </nav>
+        
+<button id="theme-toggle">
+    🌙
+</button>
 
-        <label>DQ Reliability</label>
-        <input type="number" name="dq1" required>
 
-        <label>DQ Temporal</label>
-        <input type="number" name="dq2" required>
 
-        <label>DQ Geographical</label>
-        <input type="number" name="dq3" required>
+    </header>
 
-        <label>DQ Technological</label>
-        <input type="number" name="dq4" required>
+    <!-- HERO -->
 
-        <label>DQ Data Collection</label>
-        <input type="number" name="dq5" required>
+    <section class="hero">
 
-        <button type="submit">Predict</button>
-    </form>
+        <h1>AI Supply Chain Emission Predictor</h1>
 
-    {% if prediction %}
-        <h3>Predicted Emission Factor: {{ prediction }}</h3>
-    {% endif %}
+        <p>
+            Predict greenhouse gas emissions using machine learning
+            and sustainability analytics.
+        </p>
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+                <h2>6+</h2>
+                <p>Industries</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>4</h2>
+                <p>GHG Types</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>AI</h2>
+                <p>Prediction Model</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- DASHBOARD -->
+
+    <div class="dashboard">
+
+        <!-- FORM PANEL -->
+
+        <div class="form-panel">
+
+            <h2>Emission Analysis</h2>
+
+            <form method="POST">
+
+                <!-- BASIC -->
+
+                <div class="section-title">
+                    Basic Information
+                </div>
+
+                <label>Industry Sector</label>
+
+                <select name="industry" required>
+                    <option value="0">Farms</option>
+                    <option value="1">Forestry & Fishing</option>
+                    <option value="2">Oil & Gas Extraction</option>
+                    <option value="3">Mining</option>
+                    <option value="4">Utilities</option>
+                    <option value="5">Construction</option>
+                </select>
+
+                <label>Greenhouse Gas Type</label>
+
+                <select name="substance" required>
+                    <option value="0">Carbon Dioxide (CO₂)</option>
+                    <option value="1">Methane (CH₄)</option>
+                    <option value="2">Nitrous Oxide (N₂O)</option>
+                    <option value="3">Other GHGs</option>
+                </select>
+
+                <label>Measurement Unit</label>
+
+                <select name="unit" required>
+                    <option value="0">kg CO₂e</option>
+                    <option value="1">kg/2018 USD</option>
+                </select>
+
+                <label>Base Emission Factor</label>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="base_emission"
+                    placeholder="Example: 2.884"
+                    required
+                >
+
+                <label>Margin / Uncertainty</label>
+
+                <input
+                    type="number"
+                    step="any"
+                    name="margin"
+                    placeholder="Example: 0.024"
+                    required
+                >
+
+                <!-- ADVANCED SETTINGS -->
+
+                <details class="advanced-section">
+
+                    <summary>
+                        Advanced Data Quality Settings
+                    </summary>
+
+                    <label>Data Reliability</label>
+
+                    <select name="dq_reliability" required>
+                        <option value="1">Very Poor</option>
+                        <option value="2">Poor</option>
+                        <option value="3">Average</option>
+                        <option value="4">Good</option>
+                        <option value="5">Excellent</option>
+                    </select>
+
+                    <label>Temporal Accuracy</label>
+
+                    <select name="dq_temporal" required>
+                        <option value="1">Very Poor</option>
+                        <option value="2">Poor</option>
+                        <option value="3">Average</option>
+                        <option value="4">Good</option>
+                        <option value="5">Excellent</option>
+                    </select>
+
+                    <label>Geographical Accuracy</label>
+
+                    <select name="dq_geo" required>
+                        <option value="1">Very Poor</option>
+                        <option value="2">Poor</option>
+                        <option value="3">Average</option>
+                        <option value="4">Good</option>
+                        <option value="5">Excellent</option>
+                    </select>
+
+                    <label>Technology Accuracy</label>
+
+                    <select name="dq_tech" required>
+                        <option value="1">Very Poor</option>
+                        <option value="2">Poor</option>
+                        <option value="3">Average</option>
+                        <option value="4">Good</option>
+                        <option value="5">Excellent</option>
+                    </select>
+
+                    <label>Data Collection Quality</label>
+
+                    <select name="dq_data" required>
+                        <option value="1">Very Poor</option>
+                        <option value="2">Poor</option>
+                        <option value="3">Average</option>
+                        <option value="4">Good</option>
+                        <option value="5">Excellent</option>
+                    </select>
+
+                </details>
+
+                <button type="submit">
+                    Analyze Emissions
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- RESULT PANEL -->
+
+        <div class="result-panel">
+
+            <h2>Prediction Dashboard</h2>
+
+            {% if prediction %}
+
+            <div class="result-card">
+
+                <div class="prediction-circle">
+                    {{ prediction }}
+                </div>
+
+                <div class="status">
+                    {{ status }}
+                </div>
+
+<!-- PROGRESS -->
+
+<div class="progress-container">
+
+    <div class="progress-bar {{ progress_class }}"></div>
+
+</div>
+
+
+                <!-- SCORE -->
+
+                <div class="score-box">
+
+                    <h3>Sustainability Score</h3>
+
+                    <div class="score-value">
+                        {{ 100 - (prediction * 20)|int }}%
+                    </div>
+
+                </div>
+
+                <!-- SUGGESTION -->
+
+                <div class="suggestion">
+                    {{ suggestion }}
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-state">
+
+                <h3>🌱 Awaiting Prediction</h3>
+
+                <p>
+                    Fill the form and generate emission analysis.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <p>
+            Built using Flask • Scikit-learn • Sustainability Analytics • Machine Learning
+        </p>
+
+    </footer>
+
+<script>
+
+const toggleBtn = document.getElementById("theme-toggle");
+
+toggleBtn.addEventListener("click", () => {
+
+    document.body.classList.toggle("light-mode");
+
+    if(document.body.classList.contains("light-mode")) {
+
+        toggleBtn.innerHTML = "☀️";
+
+    } else {
+
+        toggleBtn.innerHTML = "🌙";
+    }
+
+});
+
+</script>
+
 </body>
+
 </html>
+
