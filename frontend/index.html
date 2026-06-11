@@ -58,33 +58,49 @@
 
         <!-- STATS -->
 
-        <div class="stats">
+      
+<div class="stats">
 
-            <div class="stat-card">
+    <div class="stat-card">
 
-                <h2>6+</h2>
+        <h2 id="total-predictions">
+            0
+        </h2>
 
-                <p>Industries</p>
+        <p>
+            Total Predictions
+        </p>
 
-            </div>
+    </div>
 
-            <div class="stat-card">
+    <div class="stat-card">
 
-                <h2>4</h2>
+        <h2 id="avg-emission">
+            0
+        </h2>
 
-                <p>GHG Types</p>
+        <p>
+            Avg Emission
+        </p>
 
-            </div>
+    </div>
 
-            <div class="stat-card">
+    <div class="stat-card">
 
-                <h2>AI</h2>
+        <h2 id="low-percentage">
+            0%
+        </h2>
 
-                <p>Prediction Model</p>
+        <p>
+            Low Emission %
+        </p>
 
-            </div>
+    </div>
 
-        </div>
+</div>
+
+
+
 
     </section>
 
@@ -367,44 +383,190 @@
 
 <!-- HISTORY SECTION -->
 
+<!-- HISTORY SECTION -->
+
 <section class="history-section">
 
     <h2>
         Prediction History
     </h2>
 
+    <!-- FILTER BUTTONS -->
+
+    <div class="history-filters">
+
+        <button onclick="filterHistory('all')">
+            All
+        </button>
+
+        <button onclick="filterHistory('low')">
+            Low
+        </button>
+
+        <button onclick="filterHistory('medium')">
+            Medium
+        </button>
+
+        <button onclick="filterHistory('high')">
+            High
+        </button>
+
+    </div>
+
+    <!-- HISTORY CARDS -->
+
     <div id="history-container">
 
     </div>
 
 </section>
-<section class="chart-section"> 
-    <h2> Emission Analytics </h2> 
+
+
+<!-- CHART SECTION -->
+
+<section class="chart-section">
+
+    <h2>
+        Emission Analytics
+    </h2>
+
     <div class="chart-grid">
-         <div class="chart-card">
-             <h3> Emission Trend </h3> 
-             <canvas id="emissionChart">
 
-             </canvas> 
-            </div> 
-            <div class="chart-card"> 
-                <h3> Emission Categories </h3> 
-                <canvas id="categoryChart">
+        <!-- TREND CHART -->
 
-                </canvas> 
-            </div> 
-        </div> 
-    </section>
+        <div class="chart-card">
+
+            <h3>
+                Emission Trend
+            </h3>
+
+            <canvas id="emissionChart">
+
+            </canvas>
+
+        </div>
+
+        <!-- CATEGORY CHART -->
+
+        <div class="chart-card">
+
+            <h3>
+                Emission Categories
+            </h3>
+
+            <canvas id="categoryChart">
+
+            </canvas>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+
+
+<!-- FOOTER -->
+
 
 <!-- FOOTER -->
 
 <footer class="footer">
 
-    <p>
-        Built using Flask • Scikit-learn • Sustainability Analytics • Machine Learning
-    </p>
+    <div class="footer-container">
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+            <h2>
+                🌍 EcoAI Dashboard
+            </h2>
+
+            <p>
+                AI-powered sustainability analytics platform
+                for environmental emission monitoring,
+                prediction, and intelligent insights.
+            </p>
+
+        </div>
+
+
+        <!-- QUICK LINKS -->
+
+        <div class="footer-links">
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="#">
+                Dashboard
+            </a>
+
+            <a href="#">
+                Analytics
+            </a>
+
+            <a href="#">
+                About
+            </a>
+
+            <a href="#">
+                Contact
+            </a>
+
+        </div>
+
+
+        <!-- TECHNOLOGIES -->
+
+        <div class="footer-tech-stack">
+
+            <h3>
+                Technologies
+            </h3>
+
+            <p>
+                Flask
+            </p>
+
+            <p>
+                MongoDB
+            </p>
+
+            <p>
+                Scikit-learn
+            </p>
+
+            <p>
+                Chart.js
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 EcoAI Dashboard •
+            Sustainability Analytics Platform
+        </p>
+
+    </div>
 
 </footer>
+
+
+
+
 
 
 

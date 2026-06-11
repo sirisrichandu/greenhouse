@@ -30,6 +30,11 @@ const progressBar =
     );
 
 
+// GLOBAL HISTORY
+
+let globalHistory = [];
+
+
 // FORM SUBMIT
 
 form.addEventListener("submit", async (e) => {
@@ -130,7 +135,7 @@ form.addEventListener("submit", async (e) => {
         suggestionText.innerHTML =
             result.suggestion;
 
-        // SCORE
+        // SUSTAINABILITY SCORE
 
         let score =
             Math.max(
@@ -150,11 +155,13 @@ form.addEventListener("submit", async (e) => {
         progressBar.style.width =
             score + "%";
 
-        // REFRESH HISTORY + CHARTS
+        // REFRESH DATA
 
         loadHistory();
 
         loadCharts();
+
+        loadStats();
 
     } catch (error) {
 
@@ -176,7 +183,9 @@ async function loadHistory() {
         const history =
             await response.json();
 
-        console.log(history);
+        // SAVE GLOBALLY
+
+        globalHistory = history;
 
         const container =
             document.getElementById(
@@ -218,6 +227,76 @@ async function loadHistory() {
 
         console.log(error);
     }
+}
+
+
+// FILTER HISTORY
+
+function filterHistory(type) {
+
+    const container =
+        document.getElementById(
+            "history-container"
+        );
+
+    container.innerHTML = "";
+
+    let filteredHistory =
+        [...globalHistory].reverse();
+
+    if (type === "low") {
+
+        filteredHistory =
+            filteredHistory.filter(
+                item =>
+                    item.prediction < 1
+            );
+
+    } else if (type === "medium") {
+
+        filteredHistory =
+            filteredHistory.filter(
+                item =>
+                    item.prediction >= 1 &&
+                    item.prediction < 3
+            );
+
+    } else if (type === "high") {
+
+        filteredHistory =
+            filteredHistory.filter(
+                item =>
+                    item.prediction >= 3
+            );
+    }
+
+    filteredHistory
+        .slice(0, 5)
+        .forEach((item) => {
+
+            container.innerHTML += `
+
+                <div class="history-card">
+
+                    <div class="history-top">
+
+                        <h3>
+                            ${item.prediction}
+                        </h3>
+
+                        <span class="history-status">
+                            ${item.status}
+                        </span>
+
+                    </div>
+
+                    <p class="history-text">
+                        ${item.suggestion}
+                    </p>
+
+                </div>
+            `;
+        });
 }
 
 
@@ -277,7 +356,7 @@ async function loadCharts() {
                 item.prediction
             );
 
-        // CREATE LINE CHART
+        // LINE CHART
 
         emissionChart = new Chart(
             lineCanvas,
@@ -333,7 +412,7 @@ async function loadCharts() {
             }
         });
 
-        // CREATE PIE CHART
+        // DOUGHNUT CHART
 
         categoryChart = new Chart(
             doughnutCanvas,
@@ -375,6 +454,39 @@ async function loadCharts() {
 }
 
 
+// LOAD STATS
+
+async function loadStats() {
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/stats"
+        );
+
+        const stats =
+            await response.json();
+
+        document.getElementById(
+            "total-predictions"
+        ).innerHTML =
+            stats.total;
+
+        document.getElementById(
+            "avg-emission"
+        ).innerHTML =
+            stats.average;
+
+        document.getElementById(
+            "low-percentage"
+        ).innerHTML =
+            stats.low_percentage + "%";
+
+    } catch (error) {
+
+        console.log(error);
+    }
+}
 
 
 // LOAD EVERYTHING
@@ -384,6 +496,8 @@ window.onload = () => {
     loadHistory();
 
     loadCharts();
+
+    loadStats();
 };
 
 
@@ -406,11 +520,10 @@ themeToggle.addEventListener("click", () => {
         )
     ) {
 
-        themeToggle.innerHTML = "🌙";
+        themeToggle.innerHTML = "☀️";
 
     } else {
 
-        themeToggle.innerHTML = "☀️";
+        themeToggle.innerHTML = "🌙";
     }
 });
-

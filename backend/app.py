@@ -2,15 +2,18 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pymongo import MongoClient
-
+from dotenv import load_dotenv
+import os
 import joblib
 import numpy as np
 
 app = Flask(__name__)
 
 CORS(app)
-# MongoDB Connection 
-client = MongoClient( "mongodb+srv://mouse:clip@cluster0.3tt01xh.mongodb.net/?appName=Cluster0" ) 
+# MongoDB Connection client
+mongo_uri = os.getenv("MONGO_URI")
+
+client = MongoClient(mongo_uri)
 db = client["greenhouse_db"] 
 collection = db["predictions"]
 
@@ -154,6 +157,76 @@ def history():
     except Exception as e:
 
         return jsonify({
+            "error": str(e)
+        })
+
+
+@app.route("/stats", methods=["GET"])
+
+def stats():
+
+    try:
+
+        predictions = list(
+            collection.find({}, {"_id": 0})
+        )
+
+        total_predictions = len(predictions)
+
+        if total_predictions == 0:
+
+            return jsonify({
+
+                "total": 0,
+
+                "average": 0,
+
+                "low_percentage": 0
+            })
+
+        # AVERAGE PREDICTION
+
+        avg_prediction = round(
+
+            sum(
+                item["prediction"]
+                for item in predictions
+            ) / total_predictions,
+
+            2
+        )
+
+        # LOW EMISSION %
+
+        low_count = sum(
+
+            1
+
+            for item in predictions
+
+            if item["prediction"] < 1
+        )
+
+        low_percentage = round(
+
+            (low_count / total_predictions) * 100,
+
+            1
+        )
+
+        return jsonify({
+
+            "total": total_predictions,
+
+            "average": avg_prediction,
+
+            "low_percentage": low_percentage
+        })
+
+    except Exception as e:
+
+        return jsonify({
+
             "error": str(e)
         })
 

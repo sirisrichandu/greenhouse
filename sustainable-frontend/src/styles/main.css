@@ -643,20 +643,7 @@ button:hover {
 
 /* SCROLLABLE CONTAINER */
 
-#history-container {
 
-    max-height: 500px;
-
-    overflow-y: auto;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 20px;
-
-    padding-right: 10px;
-}
 
 /* SCROLLBAR */
 
@@ -1105,4 +1092,197 @@ body.light-mode {
 .light-mode .footer-bottom p {
 
     color: #334155;
+}
+.history-container {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(250px, 1fr));
+
+  gap: 20px;
+
+  max-height: 500px;
+
+  overflow-y: auto;
+
+  padding-right: 10px;
+}
+/* CUSTOM SCROLLBAR */
+
+.history-container::-webkit-scrollbar {
+
+  width: 10px;
+}
+
+.history-container::-webkit-scrollbar-track {
+
+  background: #1e293b;
+
+  border-radius: 10px;
+}
+
+.history-container::-webkit-scrollbar-thumb {
+
+  background: #38bdf8;
+
+  border-radius: 10px;
+}
+
+.history-container::-webkit-scrollbar-thumb:hover {
+
+  background: #0ea5e9;
+}
+/* THEME MODES */
+
+body.dark {
+
+  background: #0f172a;
+
+  color: white;
+
+  transition: 0.4s;
+}
+
+
+
+body.light {
+
+  background: #f8fafc;
+
+  color: #0f172a;
+
+  transition: 0.4s;
+}
+
+
+
+/* LIGHT MODE CARDS */
+
+body.light .form-panel,
+body.light .result-card,
+body.light .history-card,
+body.light .chart-card {
+
+  background: rgba(255,255,255,0.9);
+
+  color: black;
+}
+
+
+
+/* LIGHT MODE INPUTS */
+
+body.light input,
+body.light select {
+
+  background: white;
+
+  color: black;
+}
+
+
+
+/* THEME BUTTON */
+
+#theme-toggle {
+
+  cursor: pointer;
+
+  padding: 10px 16px;
+
+  border-radius: 10px;
+
+  border: none;
+
+  font-size: 18px;
+}
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 768px) {
+
+  .dashboard {
+
+    grid-template-columns: 1fr;
+  }
+
+  .chart-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+  nav {
+
+    display: flex;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+  }
+
+  .prediction-circle {
+
+    width: 120px;
+    height: 120px;
+
+    font-size: 22px;
+  }
+
+}
+/* FOOTER */
+
+.footer {
+
+  margin-top: 60px;
+
+  padding: 40px;
+
+  background: rgba(255,255,255,0.05);
+
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-container {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(250px, 1fr));
+
+  gap: 30px;
+}
+
+.footer h2,
+.footer h3 {
+
+  margin-bottom: 15px;
+}
+
+.footer a {
+
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #38bdf8;
+
+  text-decoration: none;
+}
+
+.footer-bottom {
+
+  text-align: center;
+
+  margin-top: 30px;
+
+  opacity: 0.7;
 }
