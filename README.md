@@ -1,77 +1,218 @@
-# 🌍 Supply Chain Emission Factor Prediction
+# 🌍 EcoAI Emission Dashboard
 
-## 📌 Project Overview
-This project is a Machine Learning–based web application that predicts **Supply Chain Greenhouse Gas (GHG) Emission Factors** using industry-specific data.  
-The system helps estimate emission intensity based on substance type, emission margins, and data quality indicators.
-
-The model is integrated with a **Flask-based frontend**, allowing users to input parameters and get real-time emission predictions.
+A full-stack AI-powered sustainability analytics platform that predicts greenhouse gas emissions using Machine Learning and visualizes environmental impact through interactive dashboards.
 
 ---
 
-## 🎯 Objectives
-- To analyze supply chain emission data
-- To build a regression model for emission factor prediction
-- To deploy the trained model using a web interface
-- To support environmental impact assessment and sustainability analysis
+# 🚀 Project Overview
+
+EcoAI Dashboard is a modern sustainability monitoring system designed to analyze and predict greenhouse gas emissions across industries.
+
+The platform combines:
+
+* ⚛️ React frontend for interactive UI
+* 🐍 Flask backend API
+* 🧠 Machine Learning prediction model
+* 🍃 MongoDB Atlas database
+* 📊 Real-time analytics charts
+
+This project demonstrates full-stack development, API integration, data visualization, and AI-based prediction systems.
 
 ---
 
-## 📊 Dataset Description
-- Source: **Official Supply Chain Emission Factors dataset (EPA-based)**
-- Format: CSV
-- Records: 264
-- Features include:
-  - Commodity Code & Name
-  - Substance (CO₂, CH₄, N₂O, Other GHGs)
-  - Emission Factors (with and without margins)
-  - Data Quality (DQ) indicators
+# 🏗 Architecture
 
-**Target Variable:**  
-`Supply Chain Emission Factors with Margins`
-
----
-
-## 🧠 Machine Learning Model
-- Model Used: **Random Forest Regressor**
-- Reason for selection:
-  - Handles non-linear relationships
-  - Robust to noise
-  - High accuracy for tabular data
-
-**Evaluation Metrics:**
-- RMSE (Root Mean Square Error)
-- R² Score
+```text id="arch1"
+React Frontend
+      ↓
+Axios API Requests
+      ↓
+Flask Backend
+      ↓
+Machine Learning Model
+      ↓
+MongoDB Atlas Database
+```
 
 ---
 
-## 🛠️ Tech Stack Used
+# ✨ Features
 
-### Backend & ML
-- Python
-- Pandas, NumPy
-- Scikit-learn
-- Joblib
+## Frontend (React)
 
-### Frontend
-- HTML
-- CSS
-
-### Web Framework
-- Flask
-
-### Tools
-- Google Colab (model training)
-- VS Code
-- Git & GitHub
+* Modern responsive dashboard UI
+* Dark / Light theme toggle
+* Interactive emission prediction form
+* Sustainability score visualization
+* Dynamic progress indicators
+* Prediction history section
+* Analytics charts using Chart.js
+* Responsive mobile-friendly design
 
 ---
 
-## 🖥️ Application Workflow
-1. User enters emission-related parameters in the frontend
-2. Inputs are sent to Flask backend
-3. Data is scaled using the saved StandardScaler
-4. Trained Random Forest model predicts emission factor
-5. Result is displayed on the web page
+## Backend (Flask)
+
+* REST API development
+* Emission prediction endpoint
+* Prediction history endpoint
+* Statistics endpoint
+* MongoDB integration
+* Machine Learning model serving
 
 ---
 
+## Machine Learning
+
+* Scikit-learn regression model
+* Emission prediction system
+* Feature scaling using StandardScaler
+* Sustainability analytics processing
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+* React
+* Vite
+* Axios
+* Chart.js
+* CSS3
+
+---
+
+## Backend
+
+* Flask
+* Flask-CORS
+* Python
+
+---
+
+## Machine Learning
+
+* Scikit-learn
+* NumPy
+* Joblib
+
+---
+
+## Database
+
+* MongoDB Atlas
+
+---
+
+# 📂 Project Structure
+
+```text id="struct1"
+backend/
+│
+├── app.py
+├── model/
+│   ├── emission_model.pkl
+│   └── scaler.pkl
+│
+└── .env
+
+
+sustainable-frontend/
+│
+├── src/
+│   ├── components/
+│   ├── services/
+│   ├── styles/
+│   └── App.jsx
+│
+└── package.json
+```
+
+---
+
+# ⚙️ Installation
+
+## Clone Repository
+
+```bash id="inst1"
+git clone <your-github-repository-url>
+```
+
+---
+
+# Backend Setup
+
+```bash id="inst2"
+cd backend
+
+pip install -r requirements.txt
+
+python app.py
+```
+
+Backend runs on:
+
+```text id="inst3"
+http://127.0.0.1:5000
+```
+
+---
+
+# Frontend Setup
+
+```bash id="inst4"
+cd sustainable-frontend
+
+npm install
+
+npm run dev
+```
+
+Frontend runs on:
+
+```text id="inst5"
+http://localhost:5173
+```
+
+---
+
+# 🔐 Environment Variables
+
+Create `.env` file inside backend folder:
+
+```env id="env1"
+MONGO_URI=your_mongodb_connection_string
+```
+
+---
+
+# 📊 Dashboard Modules
+
+* Emission Prediction Dashboard
+* Sustainability Score Analysis
+* Prediction History Tracking
+* Emission Trend Analytics
+* Emission Category Visualization
+
+---
+
+# 🌱 Future Improvements
+
+* User Authentication
+* PDF Report Generation
+* Live Sustainability Monitoring
+* Cloud Deployment
+* Advanced ML Models
+
+---
+
+# 👨‍💻 Developed By
+
+Siri Sri
+
+---
+
+# 📜 License
+
+Developed for educational and sustainability research purposes.
