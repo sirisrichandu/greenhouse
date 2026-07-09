@@ -1,19 +1,34 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Dashboard from "./components/Dashboard";
-import HistorySection from "./components/HistorySection";
-import ChartSection from "./components/ChartSection";
-import Footer from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
+
+import DashboardPage from "./pages/DashboardPage";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <Dashboard />
-      <ChartSection />
-      <HistorySection />
-      <Footer />
-    </>
+    <Routes>
+
+      <Route
+        path="/"
+        element={<Login />}
+      />
+
+      <Route
+        path="/signup"
+        element={<Signup />}
+      />
+
+      
+      <Route
+      path="/dashboard"
+      element={
+    <ProtectedRoute>
+      <DashboardPage />
+    </ProtectedRoute>
+  }
+/>
+
+    </Routes>
   );
 }
 

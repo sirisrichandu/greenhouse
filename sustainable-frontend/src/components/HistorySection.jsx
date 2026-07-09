@@ -2,6 +2,27 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 
 function HistorySection() {
+  const industryNames = {
+
+  0: "Farms",
+  1: "Forestry & Fishing",
+  2: "Oil & Gas Extraction",
+  3: "Mining",
+  4: "Utilities",
+  5: "Construction"
+
+};
+
+
+
+const substanceNames = {
+
+  0: "Carbon Dioxide (CO₂)",
+  1: "Methane (CH₄)",
+  2: "Nitrous Oxide (N₂O)",
+  3: "Other GHGs"
+
+};
 
   const [history, setHistory] = useState([]);
 
@@ -62,6 +83,7 @@ else {
       </h2>
 
       <div className="history-container">
+      
 
         {history.map((item, index) => (
 
@@ -85,16 +107,16 @@ else {
             <p>
 
               Industry:
-              {" "}
-              {item.industry}
+{" "}
+{industryNames[item.industry]}
 
             </p>
 
             <p>
 
               Substance:
-              {" "}
-              {item.substance}
+{" "}
+{substanceNames[item.substance]}
 
             </p>
 

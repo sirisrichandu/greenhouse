@@ -17,11 +17,18 @@ function Dashboard() {
   const [dqData, setDqData] = useState("3");
 
   const [prediction, setPrediction] = useState("0.0000");
-  const [status, setStatus] = useState("Awaiting Prediction");
 
-  const [suggestion, setSuggestion] = useState(
-    "Fill the form and generate emission analysis."
-  );
+  const [status, setStatus] =
+    useState("Awaiting Prediction");
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const [suggestion, setSuggestion] =
+    useState(
+      "Fill the form and generate emission analysis."
+    );
+
 
 
 
@@ -29,25 +36,39 @@ function Dashboard() {
 
     e.preventDefault();
 
+    setLoading(true);
+
+
+
+
     try {
 
-      const response = await API.post("/predict", {
+      const response = await API.post(
+        "/predict",
+        {
 
-        industry: industry,
+          industry: industry,
 
-        substance: substance,
-        unit: unit,
+          substance: substance,
 
-        base_emission: baseEmission,
-        margin: margin,
+          unit: unit,
 
-        dq_reliability: dqReliability,
-        dq_temporal: dqTemporal,
-        dq_geo: dqGeo,
-        dq_tech: dqTech,
-        dq_data: dqData,
+          base_emission: baseEmission,
 
-      });
+          margin: margin,
+
+          dq_reliability: dqReliability,
+
+          dq_temporal: dqTemporal,
+
+          dq_geo: dqGeo,
+
+          dq_tech: dqTech,
+
+          dq_data: dqData,
+
+        }
+      );
 
 
 
@@ -68,7 +89,11 @@ function Dashboard() {
 
       setStatus(response.data.status);
 
-      setSuggestion(response.data.suggestion);
+      setSuggestion(
+        response.data.suggestion
+      );
+
+      setLoading(false);
 
     }
 
@@ -76,9 +101,12 @@ function Dashboard() {
 
       console.log(error);
 
+      setLoading(false);
+
     }
 
   };
+
 
 
 
@@ -100,13 +128,18 @@ function Dashboard() {
           {/* BASIC SECTION */}
 
           <div className="section-title">
+
             Basic Information
+
           </div>
 
 
 
+
           <label>
+
             Industry Sector
+
           </label>
 
           <select
@@ -117,27 +150,39 @@ function Dashboard() {
           >
 
             <option value="0">
+
               Farms
+
             </option>
 
             <option value="1">
+
               Forestry & Fishing
+
             </option>
 
             <option value="2">
+
               Oil & Gas Extraction
+
             </option>
 
             <option value="3">
+
               Mining
+
             </option>
 
             <option value="4">
+
               Utilities
+
             </option>
 
             <option value="5">
+
               Construction
+
             </option>
 
           </select>
@@ -146,7 +191,9 @@ function Dashboard() {
 
 
           <label>
+
             Greenhouse Gas Type
+
           </label>
 
           <select
@@ -157,19 +204,27 @@ function Dashboard() {
           >
 
             <option value="0">
+
               Carbon Dioxide (CO₂)
+
             </option>
 
             <option value="1">
+
               Methane (CH₄)
+
             </option>
 
             <option value="2">
+
               Nitrous Oxide (N₂O)
+
             </option>
 
             <option value="3">
+
               Other GHGs
+
             </option>
 
           </select>
@@ -178,7 +233,9 @@ function Dashboard() {
 
 
           <label>
+
             Measurement Unit
+
           </label>
 
           <select
@@ -189,11 +246,15 @@ function Dashboard() {
           >
 
             <option value="0">
+
               kg CO₂e
+
             </option>
 
             <option value="1">
+
               kg/2018 USD
+
             </option>
 
           </select>
@@ -202,7 +263,9 @@ function Dashboard() {
 
 
           <label>
+
             Base Emission Factor
+
           </label>
 
           <input
@@ -211,7 +274,9 @@ function Dashboard() {
             placeholder="Example: 2.884"
             value={baseEmission}
             onChange={(e) =>
-              setBaseEmission(e.target.value)
+              setBaseEmission(
+                e.target.value
+              )
             }
             required
           />
@@ -220,7 +285,9 @@ function Dashboard() {
 
 
           <label>
+
             Margin / Uncertainty
+
           </label>
 
           <input
@@ -242,40 +309,57 @@ function Dashboard() {
           <details className="advanced-section">
 
             <summary>
+
               Advanced Data Quality Settings
+
             </summary>
 
 
 
+
             <label>
+
               Data Reliability
+
             </label>
 
             <select
               value={dqReliability}
               onChange={(e) =>
-                setDqReliability(e.target.value)
+                setDqReliability(
+                  e.target.value
+                )
               }
             >
 
               <option value="1">
+
                 Very Poor
+
               </option>
 
               <option value="2">
+
                 Poor
+
               </option>
 
               <option value="3">
+
                 Average
+
               </option>
 
               <option value="4">
+
                 Good
+
               </option>
 
               <option value="5">
+
                 Excellent
+
               </option>
 
             </select>
@@ -284,34 +368,48 @@ function Dashboard() {
 
 
             <label>
+
               Temporal Accuracy
+
             </label>
 
             <select
               value={dqTemporal}
               onChange={(e) =>
-                setDqTemporal(e.target.value)
+                setDqTemporal(
+                  e.target.value
+                )
               }
             >
 
               <option value="1">
+
                 Very Poor
+
               </option>
 
               <option value="2">
+
                 Poor
+
               </option>
 
               <option value="3">
+
                 Average
+
               </option>
 
               <option value="4">
+
                 Good
+
               </option>
 
               <option value="5">
+
                 Excellent
+
               </option>
 
             </select>
@@ -320,7 +418,9 @@ function Dashboard() {
 
 
             <label>
+
               Geographical Accuracy
+
             </label>
 
             <select
@@ -331,23 +431,33 @@ function Dashboard() {
             >
 
               <option value="1">
+
                 Very Poor
+
               </option>
 
               <option value="2">
+
                 Poor
+
               </option>
 
               <option value="3">
+
                 Average
+
               </option>
 
               <option value="4">
+
                 Good
+
               </option>
 
               <option value="5">
+
                 Excellent
+
               </option>
 
             </select>
@@ -356,7 +466,9 @@ function Dashboard() {
 
 
             <label>
+
               Technology Accuracy
+
             </label>
 
             <select
@@ -367,23 +479,33 @@ function Dashboard() {
             >
 
               <option value="1">
+
                 Very Poor
+
               </option>
 
               <option value="2">
+
                 Poor
+
               </option>
 
               <option value="3">
+
                 Average
+
               </option>
 
               <option value="4">
+
                 Good
+
               </option>
 
               <option value="5">
+
                 Excellent
+
               </option>
 
             </select>
@@ -392,7 +514,9 @@ function Dashboard() {
 
 
             <label>
+
               Data Collection Quality
+
             </label>
 
             <select
@@ -403,23 +527,33 @@ function Dashboard() {
             >
 
               <option value="1">
+
                 Very Poor
+
               </option>
 
               <option value="2">
+
                 Poor
+
               </option>
 
               <option value="3">
+
                 Average
+
               </option>
 
               <option value="4">
+
                 Good
+
               </option>
 
               <option value="5">
+
                 Excellent
+
               </option>
 
             </select>
@@ -429,8 +563,25 @@ function Dashboard() {
 
 
 
-          <button type="submit">
-            Analyze Emissions
+          <button
+            type="submit"
+            disabled={loading}
+          >
+
+            {loading ? (
+
+              <span className="loader">
+
+                ⏳ Analyzing...
+
+              </span>
+
+            ) : (
+
+              "Analyze Emissions"
+
+            )}
+
           </button>
 
         </form>
@@ -439,13 +590,19 @@ function Dashboard() {
 
 
 
+
       {/* RESULT PANEL */}
 
       <div className="result-panel">
 
         <h2>
+
           Prediction Dashboard
+
         </h2>
+
+
+
 
         <div className="result-card">
 
@@ -467,45 +624,59 @@ function Dashboard() {
 
 
 
+
           <div className="status">
 
             {status}
 
           </div>
- <div className="progress-container">
-
-  <div
-    className={`progress-bar ${
-      status.includes("Low")
-        ? "progress-low"
-        : status.includes("Medium")
-        ? "progress-medium"
-        : "progress-high"
-    }`}
-  >
-
-  </div>
-
-</div>
 
 
 
-<div className="score-box">
 
-  <h3>
-    Sustainability Score
-  </h3>
+          <div className="progress-container">
 
-  <div className="score-value">
+            <div
+              className={`progress-bar ${
+                status.includes("Low")
+                  ? "progress-low"
+                  : status.includes(
+                      "Medium"
+                    )
+                  ? "progress-medium"
+                  : "progress-high"
+              }`}
+            >
 
-    {Math.max(
-      0,
-      Math.round(100 - prediction * 20)
-    )}%
+            </div>
 
-  </div>
+          </div>
 
-</div>
+
+
+
+          <div className="score-box">
+
+            <h3>
+
+              Sustainability Score
+
+            </h3>
+
+            <div className="score-value">
+
+              {Math.max(
+                0,
+                Math.round(
+                  100 - prediction * 20
+                )
+              )}%
+
+            </div>
+
+          </div>
+
+
 
 
           <div className="suggestion">
