@@ -1,0 +1,5 @@
+Commodity Name,Substance,Unit,Supply Chain Emission Factors without Margins,Margins of Supply Chain Emission Factors,DQ ReliabilityScore of Factors without Margins,DQ TemporalCorrelation of Factors without Margins,DQ GeographicalCorrelation of Factors without Margins,DQ TechnologicalCorrelation of Factors without Margins,DQ DataCollection of Factors without Margins
+Farms,carbon dioxide,"kg/2018 USD, purchaser price",0.467,0.046,4,2,1,4,1
+Farms,methane,"kg/2018 USD, purchaser price",0.025,0,3,2,1,1,1
+Oil and gas extraction,carbon dioxide,"kg/2018 USD, purchaser price",0.508,0.062,4,2,1,3,1
+"Mining, except oil and gas",methane,"kg/2018 USD, purchaser price",0.022,0.001,4,2,1,1,1
